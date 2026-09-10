@@ -3,18 +3,24 @@ name: Deploy Checkout Service
 on:
   push:
     branches:
-      - '*'
+      - main
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
+    # Manual dispatch must obey the same branch restriction as push events.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      id-token: write
+    environment: production
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Build application
         run: |
@@ -24,15 +30,9 @@ jobs:
 
       - name: Deploy to production
         env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          API_TOKEN: ${{ secrets.API_TOKEN }}
           ENVIRONMENT: production
         run: |
-          echo "Deploying to production..."
-          echo "Deploy key: ${DEPLOY_KEY:0:10}..."
-          echo "Database URL: $DATABASE_URL"
-          echo "API Token: ${API_TOKEN:0:10}..."
+          echo "Simulating deployment to $ENVIRONMENT..."
           echo "Application deployed successfully"
           echo "Deployment timestamp: $(date)"
 
