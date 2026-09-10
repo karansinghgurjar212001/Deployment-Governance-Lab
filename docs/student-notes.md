@@ -27,9 +27,9 @@ The source repository intentionally omits governance; these gaps allow deploymen
 
 ## Environment configuration and behavioral validation
 
-Pending. The browser needs an authenticated session to capture the required initial settings screenshot before configuration changes. No approval-gate success is claimed until a real main-branch run pauses, is captured, is approved, and completes.
+Completed on 2026-09-10. Screenshot 2 captured the empty environment settings before hardening. Screenshot 3 captured the saved production protections. PR #1 was merged as e3582b53a58f061881a111f4defcfe79b2f1da23, triggering the deployment from main.
 
-Intended configuration: required reviewer `karansinghgurjar212001` (verified repository owner/admin), selected deployment branch `main`, one-minute wait timer, and administrator bypass disabled. Self-review is needed for this explicitly authorized single-account lab demonstration.
+Verified configuration: required reviewer `karansinghgurjar212001` (verified repository owner/admin), selected deployment branch `main`, one-minute wait timer, and administrator bypass disabled. Self-review is needed for this explicitly authorized single-account lab demonstration.
 
 GitHub's native environment reviewer list requires approval from **one** listed reviewer, not every listed reviewer. The starter README's claim that listing two users requires two approvals is inaccurate. A genuine two-approval policy needs an additional control and a second authorized reviewer. See https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments#required-reviewers.
 
@@ -39,6 +39,10 @@ GitHub's native environment reviewer list requires approval from **one** listed 
 - Actionlint 1.7.12: both workflows pass after the CI action update. Official release archive checksum verified.
 - `npm test`: passed, but is only an echo placeholder, not application test coverage.
 - `npm run build`: passed, but is only an echo placeholder, not a compilation step.
-- GitHub workflow execution, approval, and final configuration verification: pending.
+- GitHub workflow execution, approval, and final configuration verification: passed. Run https://github.com/karansinghgurjar212001/Deployment-Governance-Lab/actions/runs/34473138039 reached status waiting, with production waiting for review. Screenshot 4 was captured before approval. The pending-deployments API confirmed the configured reviewer could approve. The approval audit records karansinghgurjar212001 approving, and github-actions[bot] satisfying the one-minute wait timer. The deploy job completed successfully at 2026-09-10T11:48:50Z; logs include Simulating deployment to production and Application deployed successfully. Screenshot 5 captures the unchanged protections after success. This was a simulation, not a cloud deployment.
 
 Screenshots and the submission PDF are kept outside this repository.
+
+## Final evidence
+
+Exactly five screenshot files are stored outside the repository, ordered: initial workflow, initial settings, corrected protections, real approval pause, final protections. Screenshot 1 is preserved unchanged. No credentials exist in the repository or production environment, and none were invented. The final PDF requires the student's actual roll number, which was not present in the supplied request.
